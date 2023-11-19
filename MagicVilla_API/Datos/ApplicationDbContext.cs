@@ -12,6 +12,7 @@ namespace MagicVilla_API.Datos
         }
 
         public DbSet<Villa> Villas { get; set; }
+        public DbSet<NumeroVilla> NumeroVillas { get; set; }
 
         //Metodo para cargar tabla con registros cuando se inicie por primera vez
         protected override void OnModelCreating(ModelBuilder modelBuilder)
