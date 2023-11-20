@@ -1,0 +1,12 @@
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\bin\Debug\net7.0\MagicVilla_Utilidad.deps.json
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\bin\Debug\net7.0\MagicVilla_Utilidad.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\bin\Debug\net7.0\MagicVilla_Utilidad.pdb
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.AssemblyInfoInputs.cache
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.AssemblyInfo.cs
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.csproj.CoreCompileInputs.cache
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.sourcelink.json
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\refint\MagicVilla_Utilidad.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\MagicVilla_Utilidad.pdb
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_Utilidad\obj\Debug\net7.0\ref\MagicVilla_Utilidad.dll

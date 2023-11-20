@@ -28,7 +28,6 @@ namespace MagicVilla_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DetalleEspecial")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaActualizacion")
@@ -56,18 +55,18 @@ namespace MagicVilla_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Amenidad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Detalle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaActualizacion")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImagenUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MetrosCuadrados")
@@ -83,9 +82,6 @@ namespace MagicVilla_API.Migrations
                     b.Property<double>("Tarifa")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("fechaActualizacion")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.ToTable("Villas");
@@ -96,26 +92,26 @@ namespace MagicVilla_API.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Detalle de la Villa..",
-                            FechaCreacion = new DateTime(2023, 11, 19, 10, 59, 8, 226, DateTimeKind.Local).AddTicks(3687),
+                            FechaActualizacion = new DateTime(2023, 11, 19, 20, 50, 13, 804, DateTimeKind.Local).AddTicks(948),
+                            FechaCreacion = new DateTime(2023, 11, 19, 20, 50, 13, 804, DateTimeKind.Local).AddTicks(937),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Villa Real",
                             Ocupantes = 5,
-                            Tarifa = 200.0,
-                            fechaActualizacion = new DateTime(2023, 11, 19, 10, 59, 8, 226, DateTimeKind.Local).AddTicks(3703)
+                            Tarifa = 200.0
                         },
                         new
                         {
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Detalle de la Villa..",
-                            FechaCreacion = new DateTime(2023, 11, 19, 10, 59, 8, 226, DateTimeKind.Local).AddTicks(3706),
+                            FechaActualizacion = new DateTime(2023, 11, 19, 20, 50, 13, 804, DateTimeKind.Local).AddTicks(950),
+                            FechaCreacion = new DateTime(2023, 11, 19, 20, 50, 13, 804, DateTimeKind.Local).AddTicks(950),
                             ImagenUrl = "",
                             MetrosCuadrados = 40,
                             Nombre = "Premium Vista a la Piscina",
                             Ocupantes = 1,
-                            Tarifa = 500.0,
-                            fechaActualizacion = new DateTime(2023, 11, 19, 10, 59, 8, 226, DateTimeKind.Local).AddTicks(3707)
+                            Tarifa = 500.0
                         });
                 });
 

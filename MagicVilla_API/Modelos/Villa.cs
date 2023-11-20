@@ -9,6 +9,7 @@ namespace MagicVilla_API.Modelos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] //Id se incrementará de uno en uno automaticamente
         public int Id { get; set; }
 
+        [Required]
         public string Nombre { get; set; }
 
         public string Detalle { get; set; }
@@ -26,6 +27,6 @@ namespace MagicVilla_API.Modelos
 
         public DateTime FechaCreacion { get; set; }
 
-        public DateTime fechaActualizacion { get; set; }
+        public DateTime FechaActualizacion { get; set; }
     }
 }

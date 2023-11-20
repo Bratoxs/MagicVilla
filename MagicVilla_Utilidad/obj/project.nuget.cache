@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "dNbV8T6VuWTYb1j+9k/XqAbsCHRcVmfVUKJFB6a1NVHwZ/BrUFo/h2O/mkYV0M45VuM6UxfKMMcEwkvWApKkxA==",
+  "success": true,
+  "projectFilePath": "D:\\Proyectos API REST\\Web APIs Net7 (Udemy)\\MagicVilla\\MagicVilla_Utilidad\\MagicVilla_Utilidad.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

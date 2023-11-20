@@ -29,7 +29,7 @@ namespace MagicVilla_API.Datos
                     Tarifa = 200,
                     Amenidad = "",
                     FechaCreacion = DateTime.Now,
-                    fechaActualizacion = DateTime.Now
+                    FechaActualizacion = DateTime.Now
                 },
                 new Villa()
                 {
@@ -42,7 +42,7 @@ namespace MagicVilla_API.Datos
                     Tarifa = 500,
                     Amenidad = "",
                     FechaCreacion = DateTime.Now,
-                    fechaActualizacion = DateTime.Now
+                    FechaActualizacion = DateTime.Now
                 }
             );
         }
