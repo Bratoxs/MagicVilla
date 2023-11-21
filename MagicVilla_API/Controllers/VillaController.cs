@@ -3,6 +3,7 @@ using MagicVilla_API.Datos;
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.DTO;
 using MagicVilla_API.Repositorio.IRepositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,7 @@ namespace MagicVilla_API.Controllers
 
         //Consultar todos los registros o recurso
         [HttpGet]
+        [Authorize] //El usuario debe estar autorizado para acceder a este endpoint
         [ProducesResponseType(StatusCodes.Status200OK)] //Documentar códigos de estado
         public async Task<ActionResult<APIResponse>> GetVillas()
         {
@@ -56,6 +58,7 @@ namespace MagicVilla_API.Controllers
 
         //Consultar un registro o recurso por id
         [HttpGet("{id:int}", Name = "GetVilla")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -96,6 +99,7 @@ namespace MagicVilla_API.Controllers
 
         //Crear un registro o recurso
         [HttpPost]
+        [Authorize(Roles ="admin")] //Puede aceder con role admin
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -140,6 +144,7 @@ namespace MagicVilla_API.Controllers
 
         //Eliminar un registro o recurso
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -181,6 +186,7 @@ namespace MagicVilla_API.Controllers
 
         //Actualizar un registro o recurso
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDto updateDto)
@@ -213,6 +219,7 @@ namespace MagicVilla_API.Controllers
 
         //Actualizar una propiedad de un registro o recurso
         [HttpPatch("{id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto)

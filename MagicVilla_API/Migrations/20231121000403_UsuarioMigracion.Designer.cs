@@ -4,6 +4,7 @@ using MagicVilla_API.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231121000403_UsuarioMigracion")]
+    partial class UsuarioMigracion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,31 +47,6 @@ namespace MagicVilla_API.Migrations
                     b.HasIndex("VillaId");
 
                     b.ToTable("NumeroVillas");
-                });
-
-            modelBuilder.Entity("MagicVilla_API.Modelos.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rol")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("MagicVilla_API.Modelos.Villa", b =>
@@ -109,7 +87,7 @@ namespace MagicVilla_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Villas");
+                    b.ToTable("Villa");
 
                     b.HasData(
                         new
@@ -117,8 +95,8 @@ namespace MagicVilla_API.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Detalle de la Villa..",
-                            FechaActualizacion = new DateTime(2023, 11, 21, 10, 36, 0, 705, DateTimeKind.Local).AddTicks(4757),
-                            FechaCreacion = new DateTime(2023, 11, 21, 10, 36, 0, 705, DateTimeKind.Local).AddTicks(4747),
+                            FechaActualizacion = new DateTime(2023, 11, 20, 19, 4, 3, 645, DateTimeKind.Local).AddTicks(5122),
+                            FechaCreacion = new DateTime(2023, 11, 20, 19, 4, 3, 645, DateTimeKind.Local).AddTicks(5112),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Villa Real",
@@ -130,8 +108,8 @@ namespace MagicVilla_API.Migrations
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Detalle de la Villa..",
-                            FechaActualizacion = new DateTime(2023, 11, 21, 10, 36, 0, 705, DateTimeKind.Local).AddTicks(4760),
-                            FechaCreacion = new DateTime(2023, 11, 21, 10, 36, 0, 705, DateTimeKind.Local).AddTicks(4759),
+                            FechaActualizacion = new DateTime(2023, 11, 20, 19, 4, 3, 645, DateTimeKind.Local).AddTicks(5124),
+                            FechaCreacion = new DateTime(2023, 11, 20, 19, 4, 3, 645, DateTimeKind.Local).AddTicks(5124),
                             ImagenUrl = "",
                             MetrosCuadrados = 40,
                             Nombre = "Premium Vista a la Piscina",
