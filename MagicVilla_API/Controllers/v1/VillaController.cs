@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using MagicVilla_API.Datos;
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.DTO;
@@ -10,10 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
-namespace MagicVilla_API.Controllers
+namespace MagicVilla_API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")] //Version que soporta los end point
     public class VillaController : ControllerBase
     {
         private readonly ILogger<VillaController> _logger;
@@ -53,7 +55,7 @@ namespace MagicVilla_API.Controllers
             }
 
             return _response;
-           
+
         }
 
         //Consultar un registro o recurso por id
@@ -99,7 +101,7 @@ namespace MagicVilla_API.Controllers
 
         //Crear un registro o recurso
         [HttpPost]
-        [Authorize(Roles ="admin")] //Puede aceder con role admin
+        [Authorize(Roles = "admin")] //Puede aceder con role admin
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

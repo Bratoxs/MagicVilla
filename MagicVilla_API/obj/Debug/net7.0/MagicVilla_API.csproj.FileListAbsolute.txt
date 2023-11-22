@@ -82,3 +82,7 @@ D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\
 D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\AutoMapper.dll
 D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Asp.Versioning.Abstractions.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Asp.Versioning.Http.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Asp.Versioning.Mvc.dll
+D:\Proyectos API REST\Web APIs Net7 (Udemy)\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Asp.Versioning.Mvc.ApiExplorer.dll

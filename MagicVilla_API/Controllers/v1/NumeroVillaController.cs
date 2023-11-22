@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using MagicVilla_API.Datos;
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.DTO;
@@ -10,10 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
-namespace MagicVilla_API.Controllers
+namespace MagicVilla_API.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")] //Version que soporta los end point
     public class NumeroVillaController : ControllerBase
     {
         private readonly ILogger<NumeroVillaController> _logger;
@@ -33,6 +35,7 @@ namespace MagicVilla_API.Controllers
         }
 
         //Consultar todos los registros o recurso
+        //[MapToApiVersion("1.0")] //Este GET pertenece a la versión 1.0
         [HttpGet]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)] //Documentar códigos de estado
@@ -41,7 +44,7 @@ namespace MagicVilla_API.Controllers
             try
             {
                 _logger.LogInformation("Obtener Numero villas");
-                IEnumerable<NumeroVilla> numerovillaList = await _numeroRepo.ObtenerTodos(incluirPropiedades:"Villa");
+                IEnumerable<NumeroVilla> numerovillaList = await _numeroRepo.ObtenerTodos(incluirPropiedades: "Villa");
 
                 _response.Resultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numerovillaList);
                 _response.statusCode = HttpStatusCode.OK;
@@ -55,8 +58,16 @@ namespace MagicVilla_API.Controllers
             }
 
             return _response;
-           
+
         }
+
+        /*Ejemplo para verificar que si se puede tener 2 métodos GET con disintas versiones
+        [MapToApiVersion("2.0")]
+        [HttpGet] //Puedo tener otro método GET siempre y cuando se especifique que pertenece a otra versión
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "valor1", "valor2" };
+        }*/
 
         //Consultar un registro o recurso por id
         [HttpGet("{id:int}", Name = "GetNumeroVilla")]
@@ -76,7 +87,7 @@ namespace MagicVilla_API.Controllers
                     return BadRequest(_response);
                 }
 
-                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id, incluirPropiedades:"Villa");
+                var numeroVilla = await _numeroRepo.Obtener(v => v.VillaNo == id, incluirPropiedades: "Villa");
 
                 if (numeroVilla == null)
                 {
@@ -120,7 +131,7 @@ namespace MagicVilla_API.Controllers
                     return BadRequest(ModelState);
                 }
 
-                if(await _villaRepo.Obtener(v => v.Id == createDto.VillaId) == null)
+                if (await _villaRepo.Obtener(v => v.Id == createDto.VillaId) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe!");
                     return BadRequest(ModelState);
@@ -209,7 +220,7 @@ namespace MagicVilla_API.Controllers
                     return BadRequest(_response);
                 }
 
-                if(await _villaRepo.Obtener (v => v.Id == updateDto.VillaId) == null)
+                if (await _villaRepo.Obtener(v => v.Id == updateDto.VillaId) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "El Id de la villa no existe!");
                     return BadRequest(ModelState);
