@@ -1,9 +1,11 @@
 using Asp.Versioning;
 using MagicVilla_API;
 using MagicVilla_API.Datos;
+using MagicVilla_API.Modelos;
 using MagicVilla_API.Repositorio;
 using MagicVilla_API.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,13 +61,13 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "Magic Villa v1",
-        Description = "API para Villas",
+        Description = "API para Villas"
     });
     options.SwaggerDoc("v2", new OpenApiInfo
     {
         Version = "v2",
         Title = "Magic Villa v2",
-        Description = "API para Villas",
+        Description = "API para Villas"
     });
 });
 
@@ -101,6 +103,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSQL"));
 });
 
+//Servicio para crear todas las tablas de Identity AspNet(empiezan los nombres de las tablas en la BD)
+builder.Services.AddIdentity<UsuarioAplicacion, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
@@ -113,7 +118,7 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddApiVersioning(options =>
 {
     options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new ApiVersion(1,0);
+    options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ReportApiVersions = true;
 })
     .AddMvc()
@@ -133,7 +138,7 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Magic_VillaV1");
         options.SwaggerEndpoint("/swagger/v2/swagger.json", "Magic_VillaV2");
-    }); 
+    });
     app.UseSwaggerUI();
 }
 
