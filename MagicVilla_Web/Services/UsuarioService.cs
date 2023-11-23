@@ -7,7 +7,7 @@ namespace MagicVilla_Web.Services
 {
     public class UsuarioService : BaseService, IUsuarioService
     {
-        private readonly IHttpClientFactory _httpClient;
+        public readonly IHttpClientFactory _httpClient;
         private string _villaUrl;
 
         public UsuarioService(IHttpClientFactory httpClient, IConfiguration configuration) :base(httpClient)

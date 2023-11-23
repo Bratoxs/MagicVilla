@@ -4,6 +4,7 @@ using MagicVilla_API.Datos;
 using MagicVilla_API.Repositorio;
 using MagicVilla_API.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +15,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers(options =>
+{
+options.CacheProfiles.Add("Default30",
+    new CacheProfile()
+    {
+        Duration = 30
+    });
+}).AddNewtonsoftJson();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //Modificar para manejar temas de documentación, se muestra dentro de Swagger
@@ -59,6 +68,9 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API para Villas",
     });
 });
+
+//Habilitar Caching
+builder.Services.AddResponseCaching();
 
 //Cambia a minuscular la ruta /api/customer
 builder.Services.AddRouting(routing => routing.LowercaseUrls = true);

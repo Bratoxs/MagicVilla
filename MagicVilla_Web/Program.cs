@@ -12,10 +12,10 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddHttpClient<IVillaService, VillaService>();
-builder.Services.AddScoped<IVillaService, VillaService>(); ;
+builder.Services.AddScoped<IVillaService, VillaService>();
 
 builder.Services.AddHttpClient<INumeroVillaService, NumeroVillaService>();
-builder.Services.AddScoped<INumeroVillaService, NumeroVillaService>(); ;
+builder.Services.AddScoped<INumeroVillaService, NumeroVillaService>();
 
 builder.Services.AddHttpClient<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
@@ -56,7 +56,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();//Agregar pipeline para la autenticación
+app.UseAuthentication(); //Agregar pipeline para la autenticación
 app.UseAuthorization();
 app.UseSession(); //Agregar pipeline para manejo de sesiones
 

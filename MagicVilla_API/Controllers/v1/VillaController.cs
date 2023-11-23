@@ -3,6 +3,7 @@ using AutoMapper;
 using MagicVilla_API.Datos;
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.DTO;
+using MagicVilla_API.Modelos.Especificaciones;
 using MagicVilla_API.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,7 @@ using System.Net;
 
 namespace MagicVilla_API.Controllers.v1
 {
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/Villa")]
     [ApiController]
     [ApiVersion("1.0")] //Version que soporta los end point
     public class VillaController : ControllerBase
@@ -34,7 +35,8 @@ namespace MagicVilla_API.Controllers.v1
 
         //Consultar todos los registros o recurso
         [HttpGet]
-        [Authorize] //El usuario debe estar autorizado para acceder a este endpoint
+        [ResponseCache(CacheProfileName = "Default30")] //Usa información que tiene almacenado en memria para no hacer una nueva consulta a la base de datos
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")] //El usuario debe estar autorizado para acceder a este endpoint
         [ProducesResponseType(StatusCodes.Status200OK)] //Documentar códigos de estado
         public async Task<ActionResult<APIResponse>> GetVillas()
         {
@@ -58,9 +60,33 @@ namespace MagicVilla_API.Controllers.v1
 
         }
 
+        //Añade páginado a la consulta de Villas
+        [HttpGet("VillasPaginado")]
+        [ResponseCache(CacheProfileName = "Default30")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<APIResponse> GetVillasPaginado([FromQuery] Parametros parametros)
+        {
+            try
+            {
+                var villaList = _villaRepo.ObtenerTodosPaginado(parametros);
+                _response.Resultado = _mapper.Map<IEnumerable<VillaDto>>(villaList);
+                _response.statusCode = HttpStatusCode.OK;
+                _response.TotalPaginas = villaList.MetaData.TotalPages;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsExitoso = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+
+            return _response;
+        }
+
         //Consultar un registro o recurso por id
         [HttpGet("{id:int}", Name = "GetVilla")]
-        [Authorize]
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -101,7 +127,7 @@ namespace MagicVilla_API.Controllers.v1
 
         //Crear un registro o recurso
         [HttpPost]
-        [Authorize(Roles = "admin")] //Puede aceder con role admin
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")] //Puede aceder con role admin
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -146,10 +172,10 @@ namespace MagicVilla_API.Controllers.v1
 
         //Eliminar un registro o recurso
         [HttpDelete("{id:int}")]
-        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeleteVilla(int id)
         {
             try
@@ -169,7 +195,7 @@ namespace MagicVilla_API.Controllers.v1
                     _response.IsExitoso = false;
                     _response.statusCode = HttpStatusCode.NotFound;
 
-                    return NotFound();
+                    return NotFound(_response);
                 }
 
                 await _villaRepo.Remover(villa);
@@ -188,7 +214,7 @@ namespace MagicVilla_API.Controllers.v1
 
         //Actualizar un registro o recurso
         [HttpPut("{id:int}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDto updateDto)
@@ -221,7 +247,7 @@ namespace MagicVilla_API.Controllers.v1
 
         //Actualizar una propiedad de un registro o recurso
         [HttpPatch("{id:int}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin", AuthenticationSchemes = "Bearer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto)

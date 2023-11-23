@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Web;
 
 namespace MagicVilla_Web.Services
 {
@@ -27,7 +28,22 @@ namespace MagicVilla_Web.Services
                 var client = _httpClient.CreateClient("MagicAPI");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
-                message.RequestUri = new Uri(apiRequest.Url);
+
+                //Paginación
+                if(apiRequest.Parametros == null)
+                {
+                    message.RequestUri = new Uri(apiRequest.Url);
+                }
+                else
+                {
+                    var builder = new UriBuilder(apiRequest.Url);
+                    var query = HttpUtility.ParseQueryString(builder.Query);
+                    query["PageNumber"] = apiRequest.Parametros.PageNumber.ToString();
+                    query["PageSize"] = apiRequest.Parametros.PageSize.ToString();
+                    builder.Query = query.ToString();
+                    string url = builder.ToString(); // Ruta: api/Villa/VillaPaginado/PageNumber=1&PageSize=4
+                    message.RequestUri = new Uri(url);
+                }
 
                 if(apiRequest.Datos != null) //Se trata de un POST o PUT que envian contenido
                 {
@@ -51,7 +67,7 @@ namespace MagicVilla_Web.Services
                 }
 
                 HttpResponseMessage apiResponse = null;
-                if (!string.IsNullOrEmpty(apiRequest.Token))
+                if(!string.IsNullOrEmpty(apiRequest.Token))
                 {
                     //Envio el token generado al header de autorización en cada uno de los EndPoint
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
@@ -88,10 +104,10 @@ namespace MagicVilla_Web.Services
                 var dto = new APIResponse
                 {
                     ErrorMessages = new List<string> { Convert.ToString(ex.Message) },
-                    IsExitoso = false,
+                    IsExitoso = false
                 };
                 var res = JsonConvert.SerializeObject(dto);
-                var responseEx = JsonConvert.DeserializeObject<T> (res);
+                var responseEx = JsonConvert.DeserializeObject<T>(res);
 
                 return responseEx;
             }

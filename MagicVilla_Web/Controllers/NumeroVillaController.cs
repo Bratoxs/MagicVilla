@@ -4,6 +4,7 @@ using MagicVilla_Web.Models;
 using MagicVilla_Web.Models.Dto;
 using MagicVilla_Web.Models.ViewModel;
 using MagicVilla_Web.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -25,6 +26,7 @@ namespace MagicVilla_Web.Controllers
 
         //Llamado para consumir APIs
         //Método para listar registros
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> IndexNumeroVilla()
         {
             List<NumeroVillaDto> numeroVillaList = new();
@@ -40,6 +42,7 @@ namespace MagicVilla_Web.Controllers
 
         //Método para crear registros
         //Get
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CrearNumeroVilla()
         {
             NumeroVillaViewModel numeroVillaVM = new();
@@ -95,6 +98,7 @@ namespace MagicVilla_Web.Controllers
         }
         //Método para actualizar registros
         //Get
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> ActualizarNumeroVilla(int villaNo)
         {
             NumeroVillaUpdateViewModel numeroVillaVM = new();
@@ -161,6 +165,7 @@ namespace MagicVilla_Web.Controllers
 
         //Método para eliminar registros
         //Get
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> RemoverNumeroVilla(int villaNo)
         {
             NumeroVillaDeleteViewModel numeroVillaVM = new();

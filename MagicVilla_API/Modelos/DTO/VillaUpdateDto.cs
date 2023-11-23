@@ -11,13 +11,13 @@ namespace MagicVilla_API.Modelos.DTO
         [MaxLength(30)]
         public string Nombre { get; set; }
 
-        public string Detalle {  get; set; }
+        public string Detalle { get; set; }
 
         [Required]
         public double Tarifa { get; set; }
 
         [Required]
-        public int Ocupantes { get; set;}
+        public int Ocupantes { get; set; }
 
         [Required]
         public int MetrosCuadrados { get; set; }
